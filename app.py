@@ -2,7 +2,13 @@ import os
 from flask import Flask, render_template, request, jsonify
 from groq import Groq
 from dotenv import load_dotenv
+import random
 
+proxies = ['35.160.120.126', '44.233.151.27', '34.211.200.85']
+selected_proxy = random.choice(proxies)
+
+os.environ['HTTP_PROXY'] = f"http://{selected_proxy}:8080"
+os.environ['HTTPS_PROXY'] = f"http://{selected_proxy}:8080"
 load_dotenv()
 
 app = Flask(__name__)
